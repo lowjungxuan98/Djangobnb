@@ -257,10 +257,97 @@ Run the following command to build and start your Docker containers:
 # [2. User Module](../backend/documentation/user_module.md)
 # [3. Property Module](../backend/documentation/property_module.md)
 # [4. Chat Module](../backend/documentation/chat_module.md)
-# [5. WebSocket Feature](../backend/documentation/websocket_feature.md)
+# [5. WebSocket Feature](../backend/documentation/websocket_module.md)
 
 temp
 ```shell
 cd backend/djangobnb_backend 
    source env/bin/activate
 ```
+brew install sshpass
+
+sshpass -p '123456' ssh root@159.223.62.28
+
+reboot
+
+sudo apt upgrade
+
+configuring openssh-server -> keep the local version currently installed
+
+apt install docker-compose
+
+create `docker-compose.prod.yml`
+
+edit `djangobnb_backend/settings.py`
+
+create `backend/nginx/Dockerfile`
+
+create `backend/nginx/nginx.conf`
+
+mkdir webapps
+
+cd webapps
+
+git clone https://github.com/lowjungxuan98/Djangobnb.git
+
+cd Djangobnb/backend
+
+touch .env
+
+vi .env
+
+paste in `.env`
+```env
+DEBUG=0
+SECRET_KEY=codewithstein
+DJANGO_ALLOWED_HOSTS=159.223.62.28 localhost 127.0.0.1 0.0.0.0 [::1]
+SQL_ENGINE=django.db.backends.postgresql
+SQL_DATABASE=djangobnb
+SQL_USER=postgresuser
+SQL_PASSWORD=postgrespassword
+SQL_HOST=db
+SQL_PORT=5432
+DATABASE=postgres
+```
+cp .env djangobnb_backend/
+
+docker-compose -f docker-compose.prod.yml up --build
+
+apt install nginx
+
+cd webapps/
+
+service nginx start
+
+cd /etc/nginx/sites-enabled/
+
+rm default
+
+touch frontend.conf; vi frontend.conf
+
+paste
+```nginx configuration
+server {
+    listen 80;
+    server_name 159.223.62.28;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+service nginx restart
+
+mv .env.prod .env
+
+cd /webapps/Djangobnb/djangobnb
+
+npm i -g pm2
+
+pm2 start npm --name "djangobnb" -- start

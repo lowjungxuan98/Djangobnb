@@ -1,5 +1,5 @@
 import { getAccessToken } from "../lib/actions";
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const apiService = {
     get: async function (url: string): Promise<any> {
         console.log('get', url);

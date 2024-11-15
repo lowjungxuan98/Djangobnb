@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import CustomButton from "../forms/CustomButton";
 import { ConversationType } from "@/app/inbox/page";
-import useWebSocket, {ReadyState} from "react-use-websocket";
+import useWebSocket from "react-use-websocket";
 import { MessageType } from "@/app/inbox/[id]/page";
 import { UserType } from "@/app/inbox/page";
 
@@ -51,11 +51,9 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         }
 
         scrollToBottom();
-    }, [lastJsonMessage]);
+    }, [lastJsonMessage]);// eslint-disable-line react-hooks/exhaustive-deps
 
     const sendMessage = async () => {
-        console.log('sendMessage'),
-
         sendJsonMessage({
             event: 'chat_message',
             data: {

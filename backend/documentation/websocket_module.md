@@ -235,9 +235,3 @@ docker-compose exec web python manage.py migrate
 
 - **Challenge**: WebSockets don't send cookies or headers in the same way as HTTP requests.
 - **Solution**: Pass the token in the query string and authenticate during the connection setup.
-
----
-
-**Happy Coding!**
-
----

@@ -1,8 +1,8 @@
 import { getUserId } from "../lib/actions";
 import apiService from "../services/apiService";
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Conversation from "../components/inbox/Conversation";
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export type UserType = {
     id: string;
     name: string;

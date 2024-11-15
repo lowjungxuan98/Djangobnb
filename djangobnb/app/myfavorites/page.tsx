@@ -1,5 +1,6 @@
 import PropertyList from "../components/properties/PropertyList";
-import { getUserId } from "../lib/actions";
+import {getUserId} from "../lib/actions";
+import {Suspense} from "react";
 
 const MyFavoritesPage = async () => {
     const userId = await getUserId();
@@ -17,9 +18,11 @@ const MyFavoritesPage = async () => {
             <h1 className="my-6 text-2xl">My favorites</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <PropertyList 
-                    favorites={true}
-                />
+                <Suspense fallback={<div>Loading properties...</div>}>
+                    <PropertyList
+                        favorites={true}
+                    />
+                </Suspense>
             </div>
         </main>
     )

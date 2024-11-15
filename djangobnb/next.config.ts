@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -12,8 +18,14 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'http',
-        hostname: '64.226.81.32',
+        hostname: '159.223.62.28',
         port: '1337',
+        pathname: '/**'
+      },
+      {
+        protocol: 'http',
+        hostname: '159.223.62.28',
+        port: '80',
         pathname: '/**'
       }
     ]

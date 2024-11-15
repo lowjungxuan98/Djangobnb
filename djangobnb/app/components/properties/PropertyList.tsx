@@ -1,8 +1,8 @@
 'use client';
-
-import { format } from 'date-fns';
-import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import {format} from 'date-fns';
+import {useEffect, useState} from 'react';
+import {useSearchParams} from 'next/navigation';
 import PropertyListItem from "./PropertyListItem";
 import apiService from '@/app/services/apiService';
 import useSearchModal from '@/app/hooks/useSearchModal';
@@ -21,9 +21,9 @@ interface PropertyListProps {
 }
 
 const PropertyList: React.FC<PropertyListProps> = ({
-    landlord_id,
-    favorites
-}) => {
+                                                       landlord_id,
+                                                       favorites
+                                                   }) => {
     const params = useSearchParams();
     const searchModal = useSearchModal();
     const country = searchModal.query.country;
@@ -128,7 +128,7 @@ const PropertyList: React.FC<PropertyListProps> = ({
         <>
             {properties.map((property) => {
                 return (
-                    <PropertyListItem 
+                    <PropertyListItem
                         key={property.id}
                         property={property}
                         markFavorite={(is_favorite: any) => markFavorite(property.id, is_favorite)}

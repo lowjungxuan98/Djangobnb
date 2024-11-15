@@ -4,9 +4,9 @@ export type SearchQuery = {
     country: string | undefined;
     checkIn: Date | undefined;
     checkOut: Date | undefined;
-    guests: Number;
-    bathrooms: Number;
-    bedrooms: Number;
+    guests: number;
+    bathrooms: number;
+    bedrooms: number;
     category: string;
 }
 

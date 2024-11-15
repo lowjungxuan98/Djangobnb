@@ -1,5 +1,5 @@
 'use client';
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 import {useState, useEffect} from 'react';
 import {Range} from 'react-date-range';
 import { differenceInDays, eachDayOfInterval, format} from 'date-fns';
@@ -25,16 +25,15 @@ interface ReservationSidebarProps {
 }
 
 const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
-    property,
-    userId
-}) => {
+                                                                   property,
+                                                                   userId
+                                                               }) => {
     const loginModal = useLoginModal();
 
     const [fee, setFee] = useState<number>(0);
     const [nights, setNights] = useState<number>(1);
     const [totalPrice, setTotalPrice] = useState<number>(0);
     const [dateRange, setDateRange] = useState<Range>(initialDateRange);
-    const [minDate, setMinDate] = useState<Date>(new Date());
     const [bookedDates, setBookedDates] = useState<Date[]>([]);
     const [guests, setGuests] = useState<string>('1');
     const guestsRange = Array.from({ length: property.guests }, (_, index) => index + 1)
@@ -98,7 +97,7 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
 
     useEffect(() => {
         getReservations();
-        
+
         if (dateRange.startDate && dateRange.endDate) {
             const dayCount = differenceInDays(
                 dateRange.endDate,
@@ -134,7 +133,7 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
             <div className="mb-6 p-3 border border-gray-400 rounded-xl">
                 <label className="mb-2 block font-bold text-xs">Guests</label>
 
-                <select 
+                <select
                     value={guests}
                     onChange={(e) => setGuests(e.target.value)}
                     className="w-full -ml-1 text-xm"
@@ -145,7 +144,7 @@ const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
                 </select>
             </div>
 
-            <div 
+            <div
                 onClick={performBooking}
                 className="w-full mb-6 py-6 text-center text-white bg-airbnb hover:bg-airbnb-dark rounded-xl"
             >

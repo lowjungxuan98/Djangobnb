@@ -1,13 +1,13 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import {cookies} from 'next/headers';
 
 export async function handleRefresh() {
     console.log('handleRefresh');
 
     const refreshToken = await getRefreshToken();
 
-    const token = await fetch('http://localhost:8000/api/auth/token/refresh/', {
+    return await fetch('http://localhost:8000/api/auth/token/refresh/', {
         method: 'POST',
         body: JSON.stringify({
             refresh: refreshToken
@@ -39,9 +39,7 @@ export async function handleRefresh() {
             console.log('error', error);
 
             resetAuthCookies();
-        })
-
-    return token;
+        });
 }
 
 export async function handleLogin(userId: string, accessToken: string, refreshToken: string) {
@@ -97,7 +95,5 @@ export async function getAccessToken() {
 
 export async function getRefreshToken() {
     const cookieStore = await cookies();
-    let refreshToken = cookieStore.get('session_refresh_token')?.value;
-
-    return refreshToken;
+    return cookieStore.get('session_refresh_token')?.value;
 }
